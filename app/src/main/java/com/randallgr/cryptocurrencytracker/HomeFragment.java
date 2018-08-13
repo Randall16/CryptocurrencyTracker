@@ -7,9 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 public class HomeFragment extends Fragment {
+
+    private TextView oneCryptoTextView;
 
 
     @Override
@@ -20,6 +23,10 @@ public class HomeFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void attachIDs(View view) {
+        oneCryptoTextView = view.findViewById(R.id.tv_oneCrypto);
     }
 
 }
