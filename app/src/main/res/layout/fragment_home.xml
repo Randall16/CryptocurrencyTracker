@@ -14,7 +14,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="One Bitcoin = $4555.56"
         android:textAlignment="center"
         android:textColor="@color/stockBlack"
         android:textSize="24sp"
@@ -37,13 +36,13 @@
         app:layout_constraintGuide_percent=".80" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_7D"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="7D: 1.45%"
+        android:textAlignment="center"
         android:textColor="@color/stockGreen"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
@@ -65,29 +64,29 @@
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_1h"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="1H: 12.5%"
+        android:textAlignment="center"
         android:textColor="@color/stockGreen"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/tv_7D"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_oneCrypto" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_30D"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="30D: 4.87%"
+        android:textAlignment="center"
         android:textColor="@color/stockGreen"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
@@ -96,30 +95,29 @@
         app:layout_constraintStart_toStartOf="@+id/guideline" />
 
     <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_24h"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="24H: -22.23"
+        android:textAlignment="center"
         android:textColor="@color/stockRed"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@+id/tv_30D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_oneCrypto" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tv_1Y"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="1Y: 67.2%"
         android:textColor="@color/stockGreen"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"

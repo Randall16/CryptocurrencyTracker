@@ -9,8 +9,6 @@ public class Bitcoin extends Cryptocurrency {
 
         this.name = "Bitcoin";
         this.ticker = "BTC";
-
-        fetchCurrentPrice();
-        fetchDailyPrices();
+        fetchAll();
     }
 }

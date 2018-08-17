@@ -2,14 +2,18 @@ package com.randallgr.cryptocurrencytracker;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.util.MutableBoolean;
 
 
 public class CryptocurrencyModel extends AndroidViewModel implements Updateable {
 
-    public Cryptocurrency cryptoArray[];
     public Cryptocurrency selectededCrypto;
+    public HomeFragment homeFragment;
+
+    public MutableLiveData<Boolean> isLoading;
 
     private Application application;
 
@@ -17,26 +21,24 @@ public class CryptocurrencyModel extends AndroidViewModel implements Updateable 
     public CryptocurrencyModel(@NonNull Application applicationParam) {
         super(applicationParam);
 
+        Log.v("tester", "running");
+
         application = applicationParam;
 
-        cryptoArray = new Cryptocurrency[3];
+        homeFragment = new HomeFragment();
         selectededCrypto = new Bitcoin(application, this);
+
+
+        isLoading = new MutableLiveData<>();
+        isLoading.setValue(false);
+        isLoading.setValue(true);
     }
 
 
     @Override
-    public void updateCurrentPrice() {
-        Log.v("tester", "working");
-    }
-
-    @Override
-    public void updateIntradayPrices() {
-
-    }
-
-    @Override
-    public void updateDailyPrices() {
-
+    public void fetchesComplete() {
+        homeFragment.updateHomeFragment(selectededCrypto);
+        isLoading.setValue(!isLoading.getValue());
     }
 
 
