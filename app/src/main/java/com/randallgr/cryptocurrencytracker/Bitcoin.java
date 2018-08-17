@@ -4,8 +4,8 @@ import android.content.Context;
 
 public class Bitcoin extends Cryptocurrency {
 
-    public Bitcoin(Context c, Updateable re) {
-        super(c,re);
+    public Bitcoin(Context c) {
+        super(c);
 
         this.name = "Bitcoin";
         this.ticker = "BTC";

@@ -5,10 +5,9 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.util.MutableBoolean;
 
 
-public class CryptocurrencyModel extends AndroidViewModel implements Updateable {
+public class CryptocurrencyModel extends AndroidViewModel implements OnFetchesCompleteListener {
 
     public Cryptocurrency selectededCrypto;
     public HomeFragment homeFragment;
@@ -26,7 +25,8 @@ public class CryptocurrencyModel extends AndroidViewModel implements Updateable 
         application = applicationParam;
 
         homeFragment = new HomeFragment();
-        selectededCrypto = new Bitcoin(application, this);
+        selectededCrypto = new Bitcoin(application);
+        selectededCrypto.setOnFetchesCompleteListener(this);
 
 
         isLoading = new MutableLiveData<>();
@@ -36,7 +36,7 @@ public class CryptocurrencyModel extends AndroidViewModel implements Updateable 
 
 
     @Override
-    public void fetchesComplete() {
+    public void onFetchesComplete() {
         homeFragment.updateHomeFragment(selectededCrypto);
         isLoading.setValue(!isLoading.getValue());
     }

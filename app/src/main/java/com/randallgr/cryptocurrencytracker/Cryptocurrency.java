@@ -24,10 +24,10 @@ public class Cryptocurrency {
     private int fetchCounter;
     private final RequestQueue volleyQueue;
     private JsonObjectRequest jsonReqCurrentPrice, jsonReqDailyPrices, jsonReqIntraDayPrices;
-    private final Updateable viewModelInterface;
+    private OnFetchesCompleteListener mListener;
 
     // constructor
-    public Cryptocurrency(Context c, Updateable updateable) {
+    public Cryptocurrency(Context c) {
         dailyPrices = new double[365];   // initializing arrays
         intraDayPrices = new double[288];
         intraHourPrices = new double[60];
@@ -37,8 +37,11 @@ public class Cryptocurrency {
         domesticCurrency = c.getSharedPreferences("userPrefs", 0)
                 .getString("domestic ticker", "USD");
 
-        viewModelInterface = updateable;
         fetchCounter = 0;
+    }
+
+    public void setOnFetchesCompleteListener(OnFetchesCompleteListener onFetchesCompleteListener) {
+        this.mListener = onFetchesCompleteListener;
     }
 
     //The fetchCurrentPrice method will return a JSON object containing the most up to date price.
@@ -240,7 +243,7 @@ public class Cryptocurrency {
 
         if(fetchCounter >= 3) {
             calculatePercentChanges();
-            viewModelInterface.fetchesComplete();
+            mListener.onFetchesComplete();
         }
     }
 
