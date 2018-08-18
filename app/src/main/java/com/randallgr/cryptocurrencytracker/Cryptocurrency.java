@@ -20,17 +20,18 @@ public class Cryptocurrency {
     protected String name, ticker, domesticCurrency;
     protected double currentPrice, hourChange, dayChange, weekChange, monthChange, yearChange;
     protected  double [] dailyPrices, intraDayPrices, intraHourPrices;
+    protected OnFetchesCompleteListener mListener;
 
     private int fetchCounter;
     private final RequestQueue volleyQueue;
     private JsonObjectRequest jsonReqCurrentPrice, jsonReqDailyPrices, jsonReqIntraDayPrices;
-    private OnFetchesCompleteListener mListener;
 
     // constructor
     public Cryptocurrency(Context c) {
         dailyPrices = new double[365];   // initializing arrays
         intraDayPrices = new double[288];
         intraHourPrices = new double[60];
+
         volleyQueue = Volley.newRequestQueue(c);  // initializing the volleyQueue
 
         // Pull user's preferred domestic currency from SharedPreferences
@@ -218,6 +219,7 @@ public class Cryptocurrency {
 
     public void fetchAll() {
 
+        volleyQueue.getCache().clear();
         fetchCounter = 0;
         fetchCurrentPrice();
         fetchDailyPrices();

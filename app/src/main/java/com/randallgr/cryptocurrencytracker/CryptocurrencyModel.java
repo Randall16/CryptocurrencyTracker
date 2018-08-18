@@ -20,7 +20,6 @@ public class CryptocurrencyModel extends AndroidViewModel implements OnFetchesCo
     public CryptocurrencyModel(@NonNull Application applicationParam) {
         super(applicationParam);
 
-        Log.v("tester", "running");
 
         application = applicationParam;
 
@@ -39,6 +38,16 @@ public class CryptocurrencyModel extends AndroidViewModel implements OnFetchesCo
     public void onFetchesComplete() {
         homeFragment.updateHomeFragment(selectededCrypto);
         isLoading.setValue(!isLoading.getValue());
+    }
+
+    public void changeSelectedCrypto(int i) {
+        if(i == 0)
+            selectededCrypto = new Bitcoin(application, this);
+        else if(i == 1)
+            selectededCrypto = new Ethereum(application, this);
+        else if(i == 2)
+            selectededCrypto = new Litecoin(application, this);
+
     }
 
 
