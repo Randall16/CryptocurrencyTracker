@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-        viewPager.setOffscreenPageLimit(2);
+        //viewPager.setOffscreenPageLimit(2);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -99,15 +99,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_home_tab);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_home_tab);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_home_tab);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_graph_tab);
+        //tabLayout.getTabAt(2).setIcon(R.drawable.ic_home_tab);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(mModel.homeFragment, "HOME");
-        adapter.addFragment(new HomeFragment(), "GRAPH");
-        adapter.addFragment(new HomeFragment(), "Converter");
+        adapter.addFragment(new GraphFragment(), "GRAPH");
+        //adapter.addFragment(new HomeFragment(), "Converter");
         viewPager.setAdapter(adapter);
     }
 

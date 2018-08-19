@@ -23,16 +23,20 @@ public class Cryptocurrency {
     protected OnFetchesCompleteListener mListener;
 
     private int fetchCounter;
-    private final RequestQueue volleyQueue;
+    private static RequestQueue volleyQueue = null;
     private JsonObjectRequest jsonReqCurrentPrice, jsonReqDailyPrices, jsonReqIntraDayPrices;
 
     // constructor
     public Cryptocurrency(Context c) {
+        jsonReqDailyPrices = null;
+        jsonReqIntraDayPrices = null;
+        jsonReqCurrentPrice = null;
         dailyPrices = new double[365];   // initializing arrays
         intraDayPrices = new double[288];
         intraHourPrices = new double[60];
 
-        volleyQueue = Volley.newRequestQueue(c);  // initializing the volleyQueue
+        if(volleyQueue == null)
+            volleyQueue = Volley.newRequestQueue(c);  // initializing the volleyQueue
 
         // Pull user's preferred domestic currency from SharedPreferences
         domesticCurrency = c.getSharedPreferences("userPrefs", 0)
@@ -219,25 +223,35 @@ public class Cryptocurrency {
 
     public void fetchAll() {
 
+        cancelJsonReqs();
         volleyQueue.getCache().clear();
         fetchCounter = 0;
-        fetchCurrentPrice();
         fetchDailyPrices();
         fetchIntraDayPrices();
+        fetchCurrentPrice();
     }
 
     public void refreshPrices() {
-        jsonReqCurrentPrice.cancel();
-        jsonReqIntraDayPrices.cancel();
+
+        cancelJsonReqs();
         volleyQueue.getCache().invalidate(jsonReqCurrentPrice.getCacheKey(), true);
         volleyQueue.getCache().invalidate(jsonReqIntraDayPrices.getCacheKey(), true);
 
         fetchCounter = 1;
 
-
-        fetchCurrentPrice();
         fetchIntraDayPrices();
+        fetchCurrentPrice();
+    }
 
+    private void cancelJsonReqs() {
+
+        if(jsonReqCurrentPrice != null && jsonReqIntraDayPrices != null
+                && jsonReqDailyPrices != null) {
+
+            jsonReqCurrentPrice.cancel();
+            jsonReqIntraDayPrices.cancel();
+            jsonReqDailyPrices.cancel();
+        }
     }
 
     private void updateFetchCounter() {
