@@ -11,6 +11,7 @@ public class CryptocurrencyModel extends AndroidViewModel implements OnFetchesCo
 
     public Cryptocurrency selectededCrypto;
     public HomeFragment homeFragment;
+    public GraphFragment graphFragment;
 
     public MutableLiveData<Boolean> isLoading;
 
@@ -24,6 +25,7 @@ public class CryptocurrencyModel extends AndroidViewModel implements OnFetchesCo
         application = applicationParam;
 
         homeFragment = new HomeFragment();
+        graphFragment = new GraphFragment();
         selectededCrypto = new Bitcoin(application);
         selectededCrypto.setOnFetchesCompleteListener(this);
 
@@ -37,6 +39,7 @@ public class CryptocurrencyModel extends AndroidViewModel implements OnFetchesCo
     @Override
     public void onFetchesComplete() {
         homeFragment.updateHomeFragment(selectededCrypto);
+        graphFragment.updateGraphFragment(selectededCrypto);
         isLoading.setValue(!isLoading.getValue());
     }
 

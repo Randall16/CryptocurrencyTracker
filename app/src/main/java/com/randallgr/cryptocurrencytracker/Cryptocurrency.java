@@ -15,7 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class Cryptocurrency {
+public abstract class Cryptocurrency {
 
     protected String name, ticker, domesticCurrency;
     protected double currentPrice, hourChange, dayChange, weekChange, monthChange, yearChange;
@@ -129,7 +129,7 @@ public class Cryptocurrency {
         for(int i = 0; i < 365; i++) {
 
             try {
-                dailyPrices[i] = data.getJSONObject(364-i).getDouble("close");
+                dailyPrices[i] = data.getJSONObject(i).getDouble("close");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -307,5 +307,9 @@ public class Cryptocurrency {
 
     public double getYearChange() {
         return yearChange;
+    }
+
+    public double getPriceByDay(int daysAgo) {
+        return dailyPrices[daysAgo];
     }
 }

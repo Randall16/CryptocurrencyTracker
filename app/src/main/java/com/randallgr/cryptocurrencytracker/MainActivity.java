@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(mModel.homeFragment, "HOME");
-        adapter.addFragment(new GraphFragment(), "GRAPH");
+        adapter.addFragment(mModel.graphFragment, "GRAPH");
         //adapter.addFragment(new HomeFragment(), "Converter");
         viewPager.setAdapter(adapter);
     }
