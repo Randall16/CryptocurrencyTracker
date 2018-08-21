@@ -100,14 +100,14 @@ public class MainActivity extends AppCompatActivity {
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_home_tab);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_graph_tab);
-        //tabLayout.getTabAt(2).setIcon(R.drawable.ic_home_tab);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_converter_tab);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(mModel.homeFragment, "HOME");
         adapter.addFragment(mModel.graphFragment, "GRAPH");
-        //adapter.addFragment(new HomeFragment(), "Converter");
+        adapter.addFragment(mModel.converterFragment, "CONVERTER");
         viewPager.setAdapter(adapter);
     }
 
