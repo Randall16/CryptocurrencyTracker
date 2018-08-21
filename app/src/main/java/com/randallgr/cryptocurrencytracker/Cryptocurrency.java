@@ -22,9 +22,11 @@ public abstract class Cryptocurrency {
     protected  double [] dailyPrices, intraDayPrices, intraHourPrices;
     protected OnFetchesCompleteListener mListener;
 
-    private int fetchCounter;
     private static RequestQueue volleyQueue = null;
     private JsonObjectRequest jsonReqCurrentPrice, jsonReqDailyPrices, jsonReqIntraDayPrices;
+    private int fetchCounter;
+    private static final String EXCHANGE = "CCCAGG";
+
 
     // constructor
     public Cryptocurrency(Context c) {
@@ -95,7 +97,7 @@ public abstract class Cryptocurrency {
     protected void fetchDailyPrices() {
         // Using CryptoCompare's histoday
         final String url = "https://min-api.cryptocompare.com/data/histoday?fsym=" +
-                ticker + "&tsym=" + domesticCurrency + "&limit=365&aggregate=1&e=CCCAGG";
+                ticker + "&tsym=" + domesticCurrency + "&limit=365&aggregate=1&e=" + EXCHANGE;
 
 
         jsonReqDailyPrices = new JsonObjectRequest(Request.Method.GET,
@@ -129,7 +131,7 @@ public abstract class Cryptocurrency {
         for(int i = 0; i < 365; i++) {
 
             try {
-                dailyPrices[i] = data.getJSONObject(i).getDouble("close");
+                dailyPrices[i] = data.getJSONObject(364 - i).getDouble("close");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -148,7 +150,7 @@ public abstract class Cryptocurrency {
 
         // Using CryptoCompare's histominute
         final String url = "https://min-api.cryptocompare.com/data/histominute?fsym=" +
-                ticker + "&tsym=" + domesticCurrency + "&limit=1440&aggregate=1&e=CCCAGG";
+                ticker + "&tsym=" + domesticCurrency + "&limit=1440&aggregate=1&e=" + EXCHANGE;
 
 
         jsonReqIntraDayPrices = new JsonObjectRequest(Request.Method.GET,
@@ -263,8 +265,8 @@ public abstract class Cryptocurrency {
         }
     }
 
-    // Using percent change formula
     private void calculatePercentChanges() {
+        // Using percent change formula
         hourChange = ( (currentPrice - intraHourPrices[59]) / intraHourPrices[59] ) * 100;
         dayChange = ( ( currentPrice - intraDayPrices[287]) / intraDayPrices[287] ) * 100;
         weekChange = ( (currentPrice - dailyPrices[6]) / dailyPrices[6] ) * 100;

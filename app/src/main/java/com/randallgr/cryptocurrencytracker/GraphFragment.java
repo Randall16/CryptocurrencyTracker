@@ -59,7 +59,7 @@ public class GraphFragment extends Fragment {
         List<Entry> ent = new ArrayList<>();
 
         for(int i = 0; i < 365; i++)
-            ent.add(new Entry(i,(float) selectedCrypto.getPriceByDay(i)));
+            ent.add(new Entry(i,(float) selectedCrypto.getPriceByDay(364 - i)));
 
         LineDataSet ds = new LineDataSet(ent, "Price");
         ds.setColors(new int[] {R.color.stockGreen}, getActivity());
@@ -67,6 +67,8 @@ public class GraphFragment extends Fragment {
         chart.setData(new LineData(ds));
         chart.getXAxis().setDrawLabels(false);
         chart.getXAxis().setDrawGridLines(false);
+        chart.setTouchEnabled(false);
+
 
     }
 
