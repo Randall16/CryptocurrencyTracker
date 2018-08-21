@@ -42,6 +42,7 @@ public class CryptocurrencyModel extends AndroidViewModel implements OnFetchesCo
     public void onFetchesComplete() {
         homeFragment.updateHomeFragment(selectededCrypto);
         graphFragment.updateGraphFragment(selectededCrypto);
+        converterFragment.updateConverterFragment(selectededCrypto);
         isLoading.setValue(!isLoading.getValue());
     }
 
