@@ -17,9 +17,9 @@ import org.json.JSONObject;
 
 public abstract class Cryptocurrency {
 
-    protected String name, ticker, domesticCurrency;
+    protected String domesticCurrency;
     protected double currentPrice, hourChange, dayChange, weekChange, monthChange, yearChange;
-    protected  double [] dailyPrices, intraDayPrices, intraHourPrices;
+    protected double [] dailyPrices, intraDayPrices, intraHourPrices;
     protected OnFetchesCompleteListener mListener;
 
     private static RequestQueue volleyQueue = null;
@@ -55,7 +55,7 @@ public abstract class Cryptocurrency {
     protected void fetchCurrentPrice() {
 
         final String url = "https://min-api.cryptocompare.com/data/price?fsym=" +
-                ticker + "&tsyms=" + domesticCurrency;
+                getTicker() + "&tsyms=" + domesticCurrency;
 
         jsonReqCurrentPrice = new JsonObjectRequest(Request.Method.GET,
                 url, null, new Response.Listener<JSONObject>() {
@@ -97,7 +97,7 @@ public abstract class Cryptocurrency {
     protected void fetchDailyPrices() {
         // Using CryptoCompare's histoday
         final String url = "https://min-api.cryptocompare.com/data/histoday?fsym=" +
-                ticker + "&tsym=" + domesticCurrency + "&limit=365&aggregate=1&e=" + EXCHANGE;
+                getTicker() + "&tsym=" + domesticCurrency + "&limit=365&aggregate=1&e=" + EXCHANGE;
 
 
         jsonReqDailyPrices = new JsonObjectRequest(Request.Method.GET,
@@ -150,7 +150,7 @@ public abstract class Cryptocurrency {
 
         // Using CryptoCompare's histominute
         final String url = "https://min-api.cryptocompare.com/data/histominute?fsym=" +
-                ticker + "&tsym=" + domesticCurrency + "&limit=1440&aggregate=1&e=" + EXCHANGE;
+                getTicker() + "&tsym=" + domesticCurrency + "&limit=1440&aggregate=1&e=" + EXCHANGE;
 
 
         jsonReqIntraDayPrices = new JsonObjectRequest(Request.Method.GET,
@@ -279,13 +279,9 @@ public abstract class Cryptocurrency {
         return currentPrice;
     }
 
-    public String getName() {
-        return name;
-    }
+    public abstract String getName();
 
-    public String getTicker() {
-        return ticker;
-    }
+    public abstract String getTicker();
 
     public String getDomesticCurrency() {
         return domesticCurrency;
