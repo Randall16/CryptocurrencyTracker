@@ -79,7 +79,7 @@ public class ConverterFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                // consider adding commas to edit text user is interacting with
             }
         });
     }
