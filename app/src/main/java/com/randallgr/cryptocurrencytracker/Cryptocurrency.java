@@ -275,13 +275,13 @@ public abstract class Cryptocurrency {
     }
 
     // GET METHODS
-    public double getCurrentPrice() {
-        return currentPrice;
-    }
-
     public abstract String getName();
 
     public abstract String getTicker();
+
+    public double getCurrentPrice() {
+        return currentPrice;
+    }
 
     public String getDomesticCurrency() {
         return domesticCurrency;
@@ -307,7 +307,24 @@ public abstract class Cryptocurrency {
         return yearChange;
     }
 
-    public double getPriceByDay(int daysAgo) {
-        return dailyPrices[daysAgo];
+    public double getIntraYearPrice(int daysAgo) {
+        if(daysAgo >= 1 && daysAgo <= 365)
+            return dailyPrices[daysAgo-1];
+        else
+            return -1;
+    }
+
+    public double getIntraDayPrice(int fiveMinutesAgo) {
+        if(fiveMinutesAgo >= 1 && fiveMinutesAgo <= 288)
+            return intraDayPrices[fiveMinutesAgo-1];
+        else
+            return -1;
+    }
+
+    public double getIntraHourPrice(int minutesAgo) {
+        if (minutesAgo >= 1 && minutesAgo <= 60)
+            return intraHourPrices[minutesAgo-1];
+        else
+            return -1;
     }
 }
