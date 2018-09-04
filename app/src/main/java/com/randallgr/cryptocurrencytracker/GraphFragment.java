@@ -3,7 +3,6 @@ package com.randallgr.cryptocurrencytracker;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +24,9 @@ public class GraphFragment extends Fragment {
     private LineChart chart;
     private LineDataSet hourDataSet, dayDataSet, sevenDayDataSet, monthDataSet, yearDataSet;
     private RadioGroup radioGroup;
-    private RadioButton hourRadioButton, dayRadioButton, sevenDayRadioButton, monthRadioButton;
-    private RadioButton yearRadioButton;
+    private RadioButton hourRadioButton, dayRadioButton, sevenDayRadioButton;
+    private RadioButton monthRadioButton, yearRadioButton;
+
 
     public GraphFragment() {
         // Required empty public constructor
@@ -51,17 +51,24 @@ public class GraphFragment extends Fragment {
         return view;
     }
 
+    // This method is called when all fetches are complete
     public void updateGraphFragment(Cryptocurrency selectedCrypto) {
-
         chart.clear();
         updateAllDataSets(selectedCrypto);
         yearRadioButton.toggle();
         displaySeries(yearDataSet);
     }
 
+
+    /**
+     * These update... methods below simply take the currently selected cryptocurrency and cycle
+     * through it historic price data and add the numbers to a data set to latter be displayed on
+     * the graph.
+     */
     private void updateAllDataSets(Cryptocurrency selectedCrypto) {
         updateHourDataSet(selectedCrypto);
         updateDayDataSet(selectedCrypto);
+        update7DayDataSet(selectedCrypto);
         update30DayDataSet(selectedCrypto);
         updateYearDataSet(selectedCrypto);
     }
@@ -84,13 +91,23 @@ public class GraphFragment extends Fragment {
         dayDataSet = new LineDataSet(entries, "Five Minute Interval Pricing");
     }
 
+    private void update7DayDataSet(Cryptocurrency selectedCrypto) {
+        List<Entry> entries = new ArrayList<>();
+
+        for(int i = 0; i < 168; i++)
+            entries.add(new Entry(i, (float) selectedCrypto.getIntraWeekPrice(168-i)));
+
+
+        sevenDayDataSet = new LineDataSet(entries, "Hour Interval Pricing");
+    }
+
     private void update30DayDataSet(Cryptocurrency selectedCrypto) {
         List<Entry> entries = new ArrayList<>();
 
-        for(int i = 0; i < 30; i++)
-            entries.add(new Entry(i, (float) selectedCrypto.getIntraYearPrice(30-i)));
+        for(int i = 0; i < 240; i++)
+            entries.add(new Entry(i, (float) selectedCrypto.getIntraMonthPrice(240-i)));
 
-        monthDataSet = new LineDataSet(entries, "Day Interval Pricing");
+        monthDataSet = new LineDataSet(entries, "Three Hour Interval Pricing");
     }
 
     private void updateYearDataSet(Cryptocurrency selectedCrypto) {
@@ -125,6 +142,13 @@ public class GraphFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 displaySeries(dayDataSet);
+            }
+        });
+
+        sevenDayRadioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                displaySeries(sevenDayDataSet);
             }
         });
 
