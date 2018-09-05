@@ -65,10 +65,12 @@ public class DomesticCurrencyDialog extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
 
                 // save users selection to SharedPreferences
-                SharedPreferences sp = getActivity().getSharedPreferences("userPrefs", 0);
+                SharedPreferences sp = getActivity()
+                        .getSharedPreferences(SharedPrefsHelper.USER_PREFERENCES, 0);
                 SharedPreferences.Editor ed = sp.edit();
-                ed.putString("domestic ticker", abriv);
+                ed.putString(SharedPrefsHelper.DOMESTIC_TICKER, abriv);
                 ed.commit();
+
 
                 // restarting application after user selection is made
                 Intent intent = getActivity().getBaseContext().getPackageManager()
@@ -77,11 +79,6 @@ public class DomesticCurrencyDialog extends DialogFragment {
                 startActivity(intent);
 
             } });
-
-
-
-
-
 
         return builder.show();
     }

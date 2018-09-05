@@ -3,6 +3,7 @@ package com.randallgr.cryptocurrencytracker;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -47,16 +48,15 @@ public class MainActivity extends AppCompatActivity {
         mModel = ViewModelProviders.of(this).get(CryptocurrencyModel.class);
         initSpinner();
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-        viewPager.setOffscreenPageLimit(2);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-        setupTabIcons();
+        //setupTabIcons();
 
         loadingCircle = findViewById(R.id.progressBar);
         loadingCircle.setVisibility(View.VISIBLE);
@@ -93,6 +93,10 @@ public class MainActivity extends AppCompatActivity {
                 DomesticCurrencyDialog domesticCurrencyDialog = new DomesticCurrencyDialog();
                 domesticCurrencyDialog.show(getSupportFragmentManager(), "d2");
                 return true;
+
+            case R.id.set_preload:
+                SetPreloadDialog setPreloadDialog = new SetPreloadDialog();
+                setPreloadDialog.show(getSupportFragmentManager(), "d1");
         }
 
 
@@ -106,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
                 R.array.supportedCryptocurrencies, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cryptoSelectionSpinner.setAdapter(adapter);
+
+        cryptoSelectionSpinner.setSelection(pullPreload());
 
         cryptoSelectionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -125,6 +131,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private int pullPreload() {
+        SharedPreferences sp = getSharedPreferences(SharedPrefsHelper.USER_PREFERENCES, 0);
+        return sp.getInt(SharedPrefsHelper.PRELOAD, 0);
+    }
+
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_home_tab);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_graph_tab);
@@ -137,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(mModel.graphFragment, "GRAPH");
         adapter.addFragment(mModel.converterFragment, "CONVERTER");
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(2);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -164,8 +176,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return null;
-            //return mFragmentTitleList.get(position);
+            //return null;
+            return mFragmentTitleList.get(position);
         }
     }
 }
