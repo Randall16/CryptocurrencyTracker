@@ -64,7 +64,12 @@ public class HomeFragment extends Fragment {
             return;
         }
 
-        oneCryptoTextView.setText("One " + selectedCrypto.getName() + " = " + selectedCrypto.getCurrentPrice());
+        String number = String.format("%,.2f", selectedCrypto.getCurrentPrice());
+
+
+        oneCryptoTextView.setText( "One " + selectedCrypto.getName() + " = " +
+                        selectedCrypto.getDomesticCurrencySymbol() + number);
+
 
         display(selectedCrypto.getHourChange(), hourTextView, "1H: ");
         display(selectedCrypto.getDayChange(), dayTextView, "1D: ");
@@ -76,6 +81,9 @@ public class HomeFragment extends Fragment {
     }
 
     private void display(double percentage, TextView et, String interval) {
+
+        // round the percentage to two decimal places
+        percentage = Double.valueOf(String.format("%.2f", percentage));
 
         if(percentage > 0)
             et.setTextColor(getResources().getColor(R.color.stockGreen));

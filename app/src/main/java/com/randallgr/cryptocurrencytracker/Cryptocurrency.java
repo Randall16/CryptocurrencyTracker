@@ -17,7 +17,7 @@ import org.json.JSONObject;
 
 public abstract class Cryptocurrency {
 
-    protected String domesticCurrency;
+    protected String domesticCurrency, domesticCurrencySymbol;
     protected double currentPrice, hourChange, dayChange, weekChange, monthChange, yearChange;
     protected double [] intraYearPrices, intraDayPrices, intraHourPrices;
     protected double [] intraWeekPrices, intraMonthPrices;
@@ -48,6 +48,8 @@ public abstract class Cryptocurrency {
         // Pull user's preferred domestic currency from SharedPreferences
         domesticCurrency = c.getSharedPreferences("userPrefs", 0)
                 .getString("domestic ticker", "USD");
+
+        domesticCurrencySymbol = determineDomesticSymbol(domesticCurrency);
 
         fetchCounter = 0;
     }
@@ -353,6 +355,21 @@ public abstract class Cryptocurrency {
         yearChange = ( (currentPrice - intraYearPrices[364]) / intraYearPrices[364] ) * 100;
     }
 
+    private static String determineDomesticSymbol(String domesticCurrency) {
+        if(domesticCurrency.equals("USD"))
+            return "$";
+        else if(domesticCurrency.equals("EUR"))
+            return "€";
+        else if(domesticCurrency.equals("GBP"))
+            return "£";
+        else if(domesticCurrency.equals("CAD"))
+            return "C$";
+        else if(domesticCurrency.equals("CNY"))
+            return "¥";
+        else
+            return "";
+    }
+
     // GET METHODS
     public abstract String getName();
 
@@ -366,6 +383,10 @@ public abstract class Cryptocurrency {
 
     public String getDomesticCurrency() {
         return domesticCurrency;
+    }
+
+    public String getDomesticCurrencySymbol() {
+        return domesticCurrencySymbol;
     }
 
     public double getHourChange() {

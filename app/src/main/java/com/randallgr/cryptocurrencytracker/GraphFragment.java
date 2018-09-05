@@ -181,7 +181,7 @@ public class GraphFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 displaySeries(yearDataSet);
-                titleTextView.setText(cryptoName + " 30 Day Graph View");
+                titleTextView.setText(cryptoName + " 1 Year Graph View");
             }
         });
     }
