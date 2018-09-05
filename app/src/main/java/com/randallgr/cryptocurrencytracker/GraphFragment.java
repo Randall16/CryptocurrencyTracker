@@ -1,6 +1,7 @@
 package com.randallgr.cryptocurrencytracker;
 
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -26,6 +28,8 @@ public class GraphFragment extends Fragment {
     private RadioGroup radioGroup;
     private RadioButton hourRadioButton, dayRadioButton, sevenDayRadioButton;
     private RadioButton monthRadioButton, yearRadioButton;
+    private TextView titleTextView;
+    private String cryptoName;
 
 
     public GraphFragment() {
@@ -40,13 +44,7 @@ public class GraphFragment extends Fragment {
 
         attachIDs(view);
         setListeners();
-
-        XAxis xAxis = chart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-
-        chart.getXAxis().setDrawLabels(false);
-        chart.getXAxis().setDrawGridLines(false);
-        chart.setTouchEnabled(false);
+        setGraphSettings(chart);
 
         return view;
     }
@@ -55,8 +53,23 @@ public class GraphFragment extends Fragment {
     public void updateGraphFragment(Cryptocurrency selectedCrypto) {
         chart.clear();
         updateAllDataSets(selectedCrypto);
+        cryptoName = selectedCrypto.getName();
         yearRadioButton.toggle();
         displaySeries(yearDataSet);
+        titleTextView.setText(cryptoName + " 1 Year Graph View");
+    }
+
+    // This method just sets the graph's settings
+    private void setGraphSettings(LineChart chart) {
+        titleTextView.setPaintFlags(titleTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTH_SIDED);
+        xAxis.setDrawLabels(false);
+        xAxis.setDrawGridLines(false);
+
+        chart.setTouchEnabled(false);
+        chart.getDescription().setEnabled(false);
     }
 
 
@@ -121,6 +134,7 @@ public class GraphFragment extends Fragment {
 
     private void attachIDs(View view) {
         chart = view.findViewById(R.id.chart);
+        titleTextView = view.findViewById(R.id.tv_title);
         radioGroup = view.findViewById(R.id.radioGroup);
         hourRadioButton = view.findViewById(R.id.rb_1h);
         dayRadioButton = view.findViewById(R.id.rb_1d);
@@ -135,6 +149,7 @@ public class GraphFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 displaySeries(hourDataSet);
+                titleTextView.setText(cryptoName + " 1 Hour Graph View");
             }
         });
 
@@ -142,6 +157,7 @@ public class GraphFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 displaySeries(dayDataSet);
+                titleTextView.setText(cryptoName + " 1 Day Graph View");
             }
         });
 
@@ -149,6 +165,7 @@ public class GraphFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 displaySeries(sevenDayDataSet);
+                titleTextView.setText(cryptoName + " 7 Day Graph View");
             }
         });
 
@@ -156,6 +173,7 @@ public class GraphFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 displaySeries(monthDataSet);
+                titleTextView.setText(cryptoName + " 30 Day Graph View");
             }
         });
 
@@ -163,6 +181,7 @@ public class GraphFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 displaySeries(yearDataSet);
+                titleTextView.setText(cryptoName + " 30 Day Graph View");
             }
         });
     }
