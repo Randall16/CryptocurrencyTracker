@@ -4,6 +4,7 @@ import android.content.Context;
 
 public class Litecoin extends Cryptocurrency {
 
+    public static final int logo = R.drawable.logo_litecoin;
     private static final String NAME = "Litecoin", TICKER = "LTC";
 
     public Litecoin(Context c) {
@@ -26,5 +27,10 @@ public class Litecoin extends Cryptocurrency {
     @Override
     public String getTicker() {
         return TICKER;
+    }
+
+    @Override
+    public int getLogoID() {
+        return logo;
     }
 }

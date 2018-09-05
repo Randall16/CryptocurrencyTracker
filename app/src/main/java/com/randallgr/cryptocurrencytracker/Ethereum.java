@@ -5,8 +5,9 @@ import android.graphics.drawable.Drawable;
 
 public class Ethereum extends Cryptocurrency {
 
-    private static final String NAME = "Ethereum", TICKER = "ETH";
 
+    public static final int logo = R.drawable.logo_ethereum;
+    private static final String NAME = "Ethereum", TICKER = "ETH";
 
 
     public Ethereum(Context c) {
@@ -31,5 +32,10 @@ public class Ethereum extends Cryptocurrency {
     @Override
     public String getTicker() {
         return TICKER;
+    }
+
+    @Override
+    public int getLogoID() {
+        return logo;
     }
 }

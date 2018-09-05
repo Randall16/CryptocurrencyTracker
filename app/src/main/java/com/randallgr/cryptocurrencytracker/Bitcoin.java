@@ -6,6 +6,7 @@ import android.media.Image;
 
 public class Bitcoin extends Cryptocurrency {
 
+    public static final int logo = R.drawable.logo_bitcoin;
     private static final String NAME = "Bitcoin", TICKER = "BTC";
 
     public Bitcoin(Context c) {
@@ -28,6 +29,11 @@ public class Bitcoin extends Cryptocurrency {
     @Override
     public String getTicker() {
         return TICKER;
+    }
+
+    @Override
+    public int getLogoID() {
+        return logo;
     }
 
 }

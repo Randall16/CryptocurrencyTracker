@@ -358,6 +358,8 @@ public abstract class Cryptocurrency {
 
     public abstract String getTicker();
 
+    public abstract int getLogoID();
+
     public double getCurrentPrice() {
         return currentPrice;
     }

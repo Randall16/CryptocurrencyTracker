@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
         display(selectedCrypto.getMonthChange(), monthTextView, "30D: ");
         display(selectedCrypto.getYearChange(), yearTextView, "1Y: ");
 
-        setImage(selectedCrypto.getTicker());
+        logo.setImageResource(selectedCrypto.getLogoID());
     }
 
     private void display(double percentage, TextView et, String interval) {
@@ -86,16 +86,6 @@ public class HomeFragment extends Fragment {
 
         et.setText(interval + String.format("%.2f",percentage) + '%');
 
-    }
-
-    private void setImage(String ticker) {
-
-        if(ticker.equals("BTC"))
-            logo.setImageResource(R.drawable.logo_bitcoin);
-        else if(ticker.equals("ETH"))
-            logo.setImageResource(R.drawable.logo_ethereum);
-        else if(ticker.equals("LTC"))
-            logo.setImageResource(R.drawable.logo_litecoin);
     }
 
 }
