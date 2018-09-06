@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 
-public class CryptocurrencyModel extends AndroidViewModel implements OnFetchesCompleteListener {
+public class CryptocurrencyViewModel extends AndroidViewModel implements OnFetchesCompleteListener {
 
     public Cryptocurrency selectededCrypto;
     public HomeFragment homeFragment;
@@ -19,7 +19,7 @@ public class CryptocurrencyModel extends AndroidViewModel implements OnFetchesCo
     private Application application;
 
 
-    public CryptocurrencyModel(@NonNull Application applicationParam) {
+    public CryptocurrencyViewModel(@NonNull Application applicationParam) {
         super(applicationParam);
 
 
