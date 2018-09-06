@@ -87,11 +87,14 @@ public class ConverterFragment extends Fragment {
     public void updateConverterFragment(Cryptocurrency cryptocurrency) {
         this.localSelectedCrypto = cryptocurrency;
 
-        cryptoTextView.setText(localSelectedCrypto.getName());
+        String domesticCurrencyName = DomesticCurrencyUtil
+                .getDomesticCurrencyName( localSelectedCrypto.getDomesticCurrency() );
+
+        cryptoTextView.setText(localSelectedCrypto.getTicker());
         domesticTextView.setText(localSelectedCrypto.getDomesticCurrency());
 
         cryptoEditText.setHint("Enter " + localSelectedCrypto.getName());
-        domesticEditText.setHint("Enter " + localSelectedCrypto.getDomesticCurrency());
+        domesticEditText.setHint("Enter " + domesticCurrencyName);
 
         if(domesticEditText.hasFocus())
             domesticEditText.setText(domesticEditText.getText().toString());

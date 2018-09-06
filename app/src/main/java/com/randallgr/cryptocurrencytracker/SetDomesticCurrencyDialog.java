@@ -9,24 +9,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DomesticCurrencyDialog extends DialogFragment {
+public class SetDomesticCurrencyDialog extends DialogFragment {
 
     private String abriv;
-    private static final String [] choices = {"U.S. Dollars", "Euros", "Brittish Pounds",
-            "Canadian Dollar", "Chinese Yuan"};
 
-
-    public DomesticCurrencyDialog() {
+    public SetDomesticCurrencyDialog() {
         // Required empty public constructor
     }
 
@@ -37,7 +29,9 @@ public class DomesticCurrencyDialog extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Choose Domestic Currency");
-        builder.setSingleChoiceItems(choices, -1, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(DomesticCurrencyUtil.SUPPORTED_DOMESTIC_CURRENCIES,
+                -1, new DialogInterface.OnClickListener() {
+
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if(i == 0)
@@ -66,9 +60,9 @@ public class DomesticCurrencyDialog extends DialogFragment {
 
                 // save users selection to SharedPreferences
                 SharedPreferences sp = getActivity()
-                        .getSharedPreferences(SharedPrefsHelper.USER_PREFERENCES, 0);
+                        .getSharedPreferences(SharedPrefsUtil.USER_PREFERENCES, 0);
                 SharedPreferences.Editor ed = sp.edit();
-                ed.putString(SharedPrefsHelper.DOMESTIC_TICKER, abriv);
+                ed.putString(SharedPrefsUtil.DOMESTIC_TICKER, abriv);
                 ed.commit();
 
 

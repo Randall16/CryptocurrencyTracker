@@ -84,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.set_domestic:
-                DomesticCurrencyDialog domesticCurrencyDialog = new DomesticCurrencyDialog();
-                domesticCurrencyDialog.show(getSupportFragmentManager(), "d2");
+                SetDomesticCurrencyDialog setDomesticCurrencyDialog = new SetDomesticCurrencyDialog();
+                setDomesticCurrencyDialog.show(getSupportFragmentManager(), "d2");
                 return true;
 
             case R.id.set_preload:
@@ -126,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int pullPreload() {
-        SharedPreferences sp = getSharedPreferences(SharedPrefsHelper.USER_PREFERENCES, 0);
-        return sp.getInt(SharedPrefsHelper.PRELOAD, 0);
+        SharedPreferences sp = getSharedPreferences(SharedPrefsUtil.USER_PREFERENCES, 0);
+        return sp.getInt(SharedPrefsUtil.PRELOAD, 0);
     }
 
     private void setupTabIcons() {

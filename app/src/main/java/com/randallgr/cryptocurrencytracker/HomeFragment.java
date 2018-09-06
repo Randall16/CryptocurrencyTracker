@@ -65,10 +65,11 @@ public class HomeFragment extends Fragment {
         }
 
         String number = String.format("%,.2f", selectedCrypto.getCurrentPrice());
+        String display = "One " + selectedCrypto.getName() + " = " +
+                DomesticCurrencyUtil.getDomesticCurrencySymbol(selectedCrypto.getDomesticCurrency());
 
 
-        oneCryptoTextView.setText( "One " + selectedCrypto.getName() + " = " +
-                        selectedCrypto.getDomesticCurrencySymbol() + number);
+        oneCryptoTextView.setText( display + number);
 
 
         display(selectedCrypto.getHourChange(), hourTextView, "1H: ");

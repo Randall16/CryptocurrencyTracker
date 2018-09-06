@@ -9,9 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 
@@ -58,10 +55,10 @@ public class SetPreloadDialog extends DialogFragment {
 
                 // save selection to SharedPreferences
                 SharedPreferences sp = getActivity().
-                        getSharedPreferences(SharedPrefsHelper.USER_PREFERENCES, 0);
+                        getSharedPreferences(SharedPrefsUtil.USER_PREFERENCES, 0);
 
                 SharedPreferences.Editor ed = sp.edit();
-                ed.putInt(SharedPrefsHelper.PRELOAD, selection);
+                ed.putInt(SharedPrefsUtil.PRELOAD, selection);
                 ed.commit();
 
                 Toast.makeText(getActivity(), "Preload Crypotcurrency Set",
