@@ -28,9 +28,6 @@ public class CryptocurrencyViewModel extends AndroidViewModel implements OnFetch
         homeFragment = new HomeFragment();
         graphFragment = new GraphFragment();
         converterFragment = new ConverterFragment();
-        selectededCrypto = new Bitcoin(application);
-        selectededCrypto.setOnFetchesCompleteListener(this);
-
 
         isLoading = new MutableLiveData<>();
         isLoading.setValue(false);
