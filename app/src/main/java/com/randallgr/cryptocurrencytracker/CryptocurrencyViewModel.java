@@ -50,9 +50,15 @@ public class CryptocurrencyViewModel extends AndroidViewModel implements OnFetch
         if(i == 0)
             selectededCrypto = new Bitcoin(application, this);
         else if(i == 1)
-            selectededCrypto = new Ethereum(application, this);
+            selectededCrypto = new BitcoinCash(application, this);
         else if(i == 2)
+            selectededCrypto = new Ethereum(application, this);
+        else if( i == 3)
             selectededCrypto = new Litecoin(application, this);
+        else if(i == 4)
+            selectededCrypto = new Ripple(application, this);
+        else if(i == 5)
+            selectededCrypto = new Stellar(application, this);
 
     }
 

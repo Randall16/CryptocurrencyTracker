@@ -1,3 +1,16 @@
+/**
+ * This class is the heart of the entire application. It contains multiple arrays to hold all the
+ * historic prices of the cryptocurrency along with fetch methods that pull the data from the API.
+ *
+ * Using the CryptoCompare API to pull all the pricing info. The API returns the data in JSON format
+ * Definitely take a look at https://min-api.cryptocompare.com/ to better understand the fetch and
+ * parse methods below.
+ *
+ * To connect to the API I am using Google's Volley library. In short this library uses a "queue" to
+ * handle multiple HTTP connections. Each Cryptocurrency object requires four requires four calls to
+ * the API.
+ */
+
 package com.randallgr.cryptocurrencytracker;
 
 import android.content.Context;
@@ -23,14 +36,14 @@ public abstract class Cryptocurrency {
     protected double [] intraWeekPrices, intraMonthPrices;
     protected OnFetchesCompleteListener mListener;
 
-    private static RequestQueue volleyQueue = null;
+    private int fetchCounter;
     private JsonObjectRequest jsonReqCurrentPrice, jsonReqDailyPrices;
     private JsonObjectRequest jsonReqIntraDayPrices, jsonReqIntraMonthPrices;
-    private int fetchCounter;
+    private static RequestQueue volleyQueue = null;
     private static final String EXCHANGE = "CCCAGG";
 
 
-    // constructor
+    // Constructor
     public Cryptocurrency(Context c) {
 
         intraYearPrices = new double[365];   // initializing arrays

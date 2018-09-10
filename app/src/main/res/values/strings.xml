@@ -3,8 +3,11 @@
 
     <string-array name="supportedCryptocurrencies">
         <item name="bitcoin">Bitcoin</item>
+        <item name="bitcoinCash">Bitcoin Cash</item>
         <item name="ethereum">Ethereum</item>
         <item name="litecoin">Litecoin</item>
+        <item name="ripple">Ripple</item>
+        <item name="stellar">Stellar</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
