@@ -5,6 +5,6 @@
         android:title="Set Preload"/>
     <item
         android:id="@+id/set_domestic"
-        android:title="Set Domestic Currenecy"/>
+        android:title="Set Domestic Currency"/>
 
 </menu>

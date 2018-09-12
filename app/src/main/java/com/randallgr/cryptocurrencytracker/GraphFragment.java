@@ -92,7 +92,11 @@ public class GraphFragment extends Fragment {
         for(int i = 0; i < 60; i++)
             entries.add(new Entry(i, (float) selectedCrypto.getIntraHourPrice(60-i)));
 
-        hourDataSet = new LineDataSet(entries, "Minute Interval Pricing");
+        final String label = "Minute Interval Pricing in "
+                + DomesticCurrencyUtil
+                .getDomesticCurrencyName(selectedCrypto.getDomesticCurrency());
+
+        hourDataSet = new LineDataSet(entries, label);
     }
 
     private void updateDayDataSet(Cryptocurrency selectedCrypto) {
@@ -101,7 +105,11 @@ public class GraphFragment extends Fragment {
         for(int i = 0; i < 288; i++)
             entries.add(new Entry(i, (float) selectedCrypto.getIntraDayPrice(288-i)));
 
-        dayDataSet = new LineDataSet(entries, "Five Minute Interval Pricing");
+        final String label = "Five Minute Interval Pricing in "
+                + DomesticCurrencyUtil
+                .getDomesticCurrencyName(selectedCrypto.getDomesticCurrency());
+
+        dayDataSet = new LineDataSet(entries, label);
     }
 
     private void update7DayDataSet(Cryptocurrency selectedCrypto) {
@@ -110,8 +118,12 @@ public class GraphFragment extends Fragment {
         for(int i = 0; i < 168; i++)
             entries.add(new Entry(i, (float) selectedCrypto.getIntraWeekPrice(168-i)));
 
+        final String label = "Hour Interval Pricing in "
+                + DomesticCurrencyUtil
+                .getDomesticCurrencyName(selectedCrypto.getDomesticCurrency());
 
-        sevenDayDataSet = new LineDataSet(entries, "Hour Interval Pricing");
+
+        sevenDayDataSet = new LineDataSet(entries, label);
     }
 
     private void update30DayDataSet(Cryptocurrency selectedCrypto) {
@@ -120,7 +132,11 @@ public class GraphFragment extends Fragment {
         for(int i = 0; i < 240; i++)
             entries.add(new Entry(i, (float) selectedCrypto.getIntraMonthPrice(240-i)));
 
-        monthDataSet = new LineDataSet(entries, "Three Hour Interval Pricing");
+        final String label = "Three Hour Interval Pricing in "
+                + DomesticCurrencyUtil
+                .getDomesticCurrencyName(selectedCrypto.getDomesticCurrency());
+
+        monthDataSet = new LineDataSet(entries, label);
     }
 
     private void updateYearDataSet(Cryptocurrency selectedCrypto) {
@@ -129,7 +145,11 @@ public class GraphFragment extends Fragment {
         for(int i = 0; i < 365; i++)
             entries.add(new Entry(i, (float) selectedCrypto.getIntraYearPrice(365-i)));
 
-        yearDataSet = new LineDataSet(entries, "Day Interval Pricing");
+        final String label = "Day Interval Pricing in "
+                + DomesticCurrencyUtil
+                .getDomesticCurrencyName(selectedCrypto.getDomesticCurrency());
+
+        yearDataSet = new LineDataSet(entries, label);
     }
 
     private void attachIDs(View view) {
