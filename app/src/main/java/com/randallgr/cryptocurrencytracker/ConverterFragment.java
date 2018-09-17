@@ -55,7 +55,8 @@ public class ConverterFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                if(et1.hasFocus() && !et1.getText().toString().equals("")) {
+                if(et1.hasFocus() && !et1.getText().toString().equals("")
+                        && !et1.getText().toString().equals(".")) {
 
                     double holder = Double.valueOf(et1.getText().toString()
                             .replaceAll(",",""));

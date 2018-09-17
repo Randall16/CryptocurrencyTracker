@@ -3,6 +3,7 @@ package com.randallgr.cryptocurrencytracker;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
@@ -15,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -97,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     private void initSpinner() {
         cryptoSelectionSpinner = findViewById(R.id.s_cryptoSelection);
 
@@ -136,13 +140,34 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_converter_tab);
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(final ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(cryptoViewModel.homeFragment, "HOME");
         adapter.addFragment(cryptoViewModel.graphFragment, "GRAPH");
         adapter.addFragment(cryptoViewModel.converterFragment, "CONVERTER");
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);     // keep all three fragments in memory
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                final InputMethodManager imm = (InputMethodManager) getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+
+                imm.hideSoftInputFromWindow(viewPager.getWindowToken(), 0);
+            }
+        });
+
     }
 
 }
