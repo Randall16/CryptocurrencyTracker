@@ -37,6 +37,7 @@ public abstract class Cryptocurrency {
     protected OnFetchesCompleteListener mListener;
 
     private int fetchCounter;
+    private boolean isValid;
     private JsonObjectRequest jsonReqCurrentPrice, jsonReqDailyPrices;
     private JsonObjectRequest jsonReqIntraDayPrices, jsonReqIntraMonthPrices;
     private static RequestQueue volleyQueue = null;
@@ -60,6 +61,7 @@ public abstract class Cryptocurrency {
                 .getString("domestic ticker", "USD");
 
         fetchCounter = 0;
+        isValid = true;
     }
 
     public void setOnFetchesCompleteListener(OnFetchesCompleteListener onFetchesCompleteListener) {
@@ -83,6 +85,7 @@ public abstract class Cryptocurrency {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.v("tester", error.getMessage());
+                isValid = false;
             }
         });
 
@@ -125,7 +128,7 @@ public abstract class Cryptocurrency {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                isValid = false;
             }
         });
 
@@ -182,6 +185,7 @@ public abstract class Cryptocurrency {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.v("tester", error.getMessage());
+                isValid = false;
             }
         });
 
@@ -256,6 +260,7 @@ public abstract class Cryptocurrency {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.v("tester", error.getMessage());
+                isValid = false;
             }
         });
 
@@ -369,6 +374,10 @@ public abstract class Cryptocurrency {
     public abstract String getTicker();
 
     public abstract int getLogoID();
+
+    public boolean getValid() {
+        return isValid;
+    }
 
     public double getCurrentPrice() {
         return currentPrice;

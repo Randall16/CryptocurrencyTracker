@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 
 public class CryptocurrencyViewModel extends AndroidViewModel implements OnFetchesCompleteListener {
@@ -37,10 +38,16 @@ public class CryptocurrencyViewModel extends AndroidViewModel implements OnFetch
 
     @Override
     public void onFetchesComplete() {
-        homeFragment.updateHomeFragment(selectededCrypto);
-        graphFragment.updateGraphFragment(selectededCrypto);
-        converterFragment.updateConverterFragment(selectededCrypto);
-        isLoading.setValue(!isLoading.getValue());
+
+        if(selectededCrypto.getValid()) {
+            homeFragment.updateHomeFragment(selectededCrypto);
+            graphFragment.updateGraphFragment(selectededCrypto);
+            converterFragment.updateConverterFragment(selectededCrypto);
+            isLoading.setValue(!isLoading.getValue());
+        }
+        else
+            Toast.makeText(application, "Error! Unable to retrieve pricing data.",
+                    Toast.LENGTH_LONG).show();
     }
 
     public void changeSelectedCrypto(int i) {
