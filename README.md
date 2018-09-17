@@ -6,13 +6,28 @@ An Android app that track the current and historic prices of popular cryptocurre
 
 This project is mostly complete. The majority of the features I was aiming for are implemented and fully functional. Some possible future additions include getting notifications involved for when there is a big price spike. I am also considering adding a "news" tab that works with the Twitter API to display recent tweets about cryptocurrrency.
 
-## Project Screen Shot(s)
+## Project Screen Shots
 
-#### Example:   
+#### Home Fragment:   
 
-[ PRETEND SCREEN SHOT IS HERE ]
+<img src="https://github.com/Randall16/CryptocurrencyTracker/blob/master/screenshots/homeFragment.jpg" width="250" >
 
-[ PRETEND OTHER SCREEN SHOT IS HERE ]
+### Graph Fragment
+
+Year Change                | 7 Day Change
+:-------------------------:|:-------------------------:
+<img src="https://github.com/Randall16/CryptocurrencyTracker/blob/master/screenshots/yearGraph.jpg" width="250" > |  <img src="https://github.com/Randall16/CryptocurrencyTracker/blob/master/screenshots/sevenDayGraph.jpg" width="250" >
+
+### Converter Fragment
+
+<img src="https://github.com/Randall16/CryptocurrencyTracker/blob/master/screenshots/converterFragment.jpg" width="250" > |  <img src="https://github.com/Randall16/CryptocurrencyTracker/blob/master/screenshots/converterWithKeypad.jpg" width="250" >
+
+### Domestic Currency Support
+
+<img src="https://github.com/Randall16/CryptocurrencyTracker/blob/master/screenshots/domesticCurrency.jpg" width="250" >
+
+
+
 
 ## Reflection
 
