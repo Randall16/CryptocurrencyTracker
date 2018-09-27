@@ -6,6 +6,8 @@ An Android app that track the current and historic prices of popular cryptocurre
 
 This project is mostly complete. The majority of the features I was aiming for are implemented and fully functional. Some possible future additions include getting notifications involved for when there is a big price spike. I am also considering adding a "news" tab that works with the Twitter API to display recent tweets about cryptocurrrency.
 
+Also, as of right now the supported cryptocurrencies are Bitcoin, Bitcoin Cash, Ethereum, Litecoin, Ripple, and Stellar. In the future if I ever want to add more this will be easy because I just need to extend the base Cryptocurrency which already contains the methods for retrieving the pricing data. 
+
 ## Project Screen Shots
 
 #### Home Fragment:   
