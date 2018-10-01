@@ -1,6 +1,6 @@
 ## Cryptocurrency Tracker
 
-An Android app that track the current and historic prices of popular cryptocurrencies such as Bitcoin. 
+An Android app that tracks the current and historic prices of popular cryptocurrencies such as Bitcoin. 
 
 ## Project Status
 
