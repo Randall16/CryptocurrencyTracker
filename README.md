@@ -29,14 +29,10 @@ Year Change                | 7 Day Change
 <img src="https://github.com/Randall16/CryptocurrencyTracker/blob/master/screenshots/domesticCurrency.jpg" width="250" >
 
 
-
-
 ## Reflection
 
-This project was mainly created to to further my experience with Android programming. There are litterly thousands of cryptocurrency price tracking apps on the Play Store so creating the "best" one wasn't a viable goal. With this project I set out to gain experience building an app that pulls data from a remote source. In this case I used the CryptoCompare API as my source of pricing data. I then used Google's Volley Library manage and create the HTTP connections with the API.
+This project was created mainly to to further my experience with Android programming. With this project I set out to gain experience building an app that pulls data from a remote source. In this case I used the CryptoCompare API (https://min-api.cryptocompare.com/) as my source of pricing data. I then used Google's Volley Library manage and create the HTTP connections with the API.
 
-After getting this initial pricing data I looked to expand on the functionality of the app. I then implemented the Graph tab by iterating through the historic price data and creating data points on the actual Graph View itself.
+After getting this initial pricing data I looked to expand on the functionality of the app. I then implemented the Graph tab by iterating through the historic price data and creating data points based on the time frame that the user has selected E.g. "7 Days" or "30 Days." To make this Graph View I used the open source MPAndroidChart Library (https://github.com/PhilJay/MPAndroidChart).
 
-One of the main challenges I faced while building this was handling assynchronous opertaions. The solution for this ended being to create an Interface that contained an "OnFetchesComplete" method. I then required this Interface to be passed into each instance of the object. When the object would complete its fetches I called that method to alert the rest of the program that data had been successfully pulled and that the U.I. components needed to be updated.
-
-Overall, I learned a ton while building this app. Working with an API that outputs data in JSON format, managing multiple HTTP requests, and working with U.I. related components like Fragments is just a sample of all the tasks necessary to make an app like this work.
+Overall, I learned a ton while building this app. Working with an API that outputs data in JSON format, managing multiple HTTP requests, and working with U.I. related components like Fragments is just a fraction of all the tasks necessary to make an app like this work.
