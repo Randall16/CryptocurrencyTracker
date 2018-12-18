@@ -1,3 +1,7 @@
+/**
+ * When refactoring wrap cryptocurrency object in livedata so that fragments don't have to use
+ * OnFetchesCompleteListener.
+ */
 package com.randallgr.cryptocurrencytracker;
 
 import android.app.Application;
